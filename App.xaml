@@ -1,0 +1,32 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiApp1"
+             x:Class="MauiApp1.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="Button" x:Key="DarkFunctionButton">
+                <Setter Property="BackgroundColor" Value="#3B3B3B"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Margin" Value="1"/>
+                <Setter Property="FontSize" Value="16"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="DarkNumberButton" BasedOn="{StaticResource DarkFunctionButton}">
+                <Setter Property="BackgroundColor" Value="#2E2E2E"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="DarkEqualsButton" BasedOn="{StaticResource DarkFunctionButton}">
+                <Setter Property="BackgroundColor" Value="#A46CDA"/>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,96 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.ScientificCalculatorPage"
+             Title="Bilimsel"
+             BackgroundColor="#1F1F1F">
+
+    <Grid RowDefinitions="Auto, 2*, Auto, Auto, Auto, Auto, *,*,*,*,*,*,*" ColumnDefinitions="*,*,*,*,*" Margin="5" Padding="5" RowSpacing="3" ColumnSpacing="3">
+
+        <Label x:Name="HistoryLabel" Text="" HorizontalOptions="End" FontSize="20" TextColor="Gray" Grid.Row="0" Grid.ColumnSpan="5"/>
+        <Entry x:Name="Display" Text="0" FontSize="52" IsReadOnly="True" TextColor="White" HorizontalTextAlignment="End" BackgroundColor="Transparent" Grid.Row="1" Grid.ColumnSpan="5"/>
+
+        <VerticalStackLayout Grid.Row="2" Grid.ColumnSpan="5" Spacing="3">
+            <HorizontalStackLayout Spacing="3">
+                <Button x:Name="DegRadButton" Text="DEG" Clicked="OnDegRadClicked" Style="{StaticResource DarkFunctionButton}"/>
+                <Button x:Name="FeButton" Text="F-E" Clicked="OnFeClicked" Style="{StaticResource DarkFunctionButton}"/>
+            </HorizontalStackLayout>
+            <Grid ColumnDefinitions="*,*,*,*,*,*">
+                <Button Text="MC" Grid.Column="0" FontSize="14" Clicked="OnMemoryClicked" Style="{StaticResource DarkFunctionButton}"/>
+                <Button Text="MR" Grid.Column="1" FontSize="14" Clicked="OnMemoryClicked" Style="{StaticResource DarkFunctionButton}"/>
+                <Button Text="M+" Grid.Column="2" FontSize="14" Clicked="OnMemoryClicked" Style="{StaticResource DarkFunctionButton}"/>
+                <Button Text="M-" Grid.Column="3" FontSize="14" Clicked="OnMemoryClicked" Style="{StaticResource DarkFunctionButton}"/>
+                <Button Text="MS" Grid.Column="4" FontSize="14" Clicked="OnMemoryClicked" Style="{StaticResource DarkFunctionButton}"/>
+                <Button Text="M▾" Grid.Column="5" FontSize="14" Style="{StaticResource DarkFunctionButton}" Clicked="Memory_View_Clicked"/>
+            </Grid>
+        </VerticalStackLayout>
+
+        <HorizontalStackLayout Grid.Row="3" Grid.ColumnSpan="5" Spacing="10" Margin="0,5">
+            <Button Text="▲ Trigonometri ▾" TextColor="White" FontSize="15" FontAttributes="Bold" BackgroundColor="#4F4F4F" Clicked="OnTrigonometryToggleClicked"/>
+            <Button Text="ƒ İşlev ▾" TextColor="White" FontSize="15" FontAttributes="Bold" BackgroundColor="#4F4F4F" Clicked="OnFunctionToggleClicked"/>
+        </HorizontalStackLayout>
+
+        <Grid x:Name="TrigonometryGrid" IsVisible="False" Grid.Row="4" Grid.ColumnSpan="5" RowDefinitions="*,*" ColumnDefinitions="*,*,*,*" ColumnSpacing="3" RowSpacing="3">
+            <Button x:Name="SecondButton" Text="2nd" Grid.Row="0" Grid.Column="0" Clicked="OnSecondClicked" Style="{StaticResource DarkFunctionButton}"/>
+            <Button x:Name="SinButton" Text="sin" Grid.Row="0" Grid.Column="1" Clicked="OnTrigFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+            <Button x:Name="CosButton" Text="cos" Grid.Row="0" Grid.Column="2" Clicked="OnTrigFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+            <Button x:Name="TanButton" Text="tan" Grid.Row="0" Grid.Column="3" Clicked="OnTrigFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+            <Button x:Name="HypButton" Text="hyp" Grid.Row="1" Grid.Column="0" Clicked="OnHypClicked" Style="{StaticResource DarkFunctionButton}"/>
+            <Button x:Name="SecButton" Text="sec" Grid.Row="1" Grid.Column="1" Clicked="OnTrigFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+            <Button x:Name="CscButton" Text="csc" Grid.Row="1" Grid.Column="2" Clicked="OnTrigFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+            <Button x:Name="CotButton" Text="cot" Grid.Row="1" Grid.Column="3" Clicked="OnTrigFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+        </Grid>
+
+        <Grid x:Name="FunctionGrid" IsVisible="False" Grid.Row="5" Grid.ColumnSpan="5" RowDefinitions="*,*" ColumnDefinitions="*,*,*" ColumnSpacing="3" RowSpacing="3">
+            <Button Text="|x|" Grid.Row="0" Grid.Column="0" Clicked="OnSpecialFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+            <Button Text="⌊x⌋" Grid.Row="0" Grid.Column="1" Clicked="OnSpecialFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+            <Button Text="⌈x⌉" Grid.Row="0" Grid.Column="2" Clicked="OnSpecialFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+            <Button Text="rand" Grid.Row="1" Grid.Column="0" Clicked="OnSpecialFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+            <Button Text="→dms" Grid.Row="1" Grid.Column="1" Clicked="OnSpecialFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+            <Button Text="→deg" Grid.Row="1" Grid.Column="2" Clicked="OnSpecialFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+        </Grid>
+
+        <Button Grid.Row="6" Grid.Column="0" Text="2nd" x:Name="MainSecondButton" Style="{StaticResource DarkFunctionButton}" Clicked="OnSecondClicked"/>
+        <Button Grid.Row="6" Grid.Column="1" Text="π" Clicked="OnConstantClicked" Style="{StaticResource DarkFunctionButton}"/>
+        <Button Grid.Row="6" Grid.Column="2" Text="e" Clicked="OnConstantClicked" Style="{StaticResource DarkFunctionButton}"/>
+        <Button Grid.Row="6" Grid.Column="3" Text="C" Clicked="OnClearClicked" Style="{StaticResource DarkFunctionButton}"/>
+        <Button Grid.Row="6" Grid.Column="4" Text="««" Clicked="OnBackspaceClicked" Style="{StaticResource DarkFunctionButton}"/>
+
+        <Button Grid.Row="7" Grid.Column="0" Text="x²" Clicked="OnFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+        <Button Grid.Row="7" Grid.Column="1" Text="1/x" Clicked="OnFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+        <Button Grid.Row="7" Grid.Column="2" Text="|x|" Clicked="OnSpecialFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+        <Button Grid.Row="7" Grid.Column="3" Text="exp" Clicked="OnFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+        <Button Grid.Row="7" Grid.Column="4" Text="mod" Clicked="OnOperatorClicked" Style="{StaticResource DarkFunctionButton}"/>
+
+        <Button Grid.Row="8" Grid.Column="0" Text="²√x" Clicked="OnFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+        <Button Grid.Row="8" Grid.Column="1" Text="(" Clicked="OnCharacterClicked" Style="{StaticResource DarkFunctionButton}"/>
+        <Button Grid.Row="8" Grid.Column="2" Text=")" Clicked="OnCharacterClicked" Style="{StaticResource DarkFunctionButton}"/>
+        <Button Grid.Row="8" Grid.Column="3" Text="n!" Clicked="OnFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+        <Button Grid.Row="8" Grid.Column="4" Text="÷" Clicked="OnOperatorClicked" Style="{StaticResource DarkFunctionButton}"/>
+
+        <Button Grid.Row="9" Grid.Column="0" Text="xʸ" Clicked="OnOperatorClicked" Style="{StaticResource DarkFunctionButton}"/>
+        <Button Grid.Row="9" Grid.Column="1" Text="7" Clicked="OnNumberClicked" Style="{StaticResource DarkNumberButton}"/>
+        <Button Grid.Row="9" Grid.Column="2" Text="8" Clicked="OnNumberClicked" Style="{StaticResource DarkNumberButton}"/>
+        <Button Grid.Row="9" Grid.Column="3" Text="9" Clicked="OnNumberClicked" Style="{StaticResource DarkNumberButton}"/>
+        <Button Grid.Row="9" Grid.Column="4" Text="×" Clicked="OnOperatorClicked" Style="{StaticResource DarkFunctionButton}"/>
+
+        <Button Grid.Row="10" Grid.Column="0" Text="10ˣ" Clicked="OnFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+        <Button Grid.Row="10" Grid.Column="1" Text="4" Clicked="OnNumberClicked" Style="{StaticResource DarkNumberButton}"/>
+        <Button Grid.Row="10" Grid.Column="2" Text="5" Clicked="OnNumberClicked" Style="{StaticResource DarkNumberButton}"/>
+        <Button Grid.Row="10" Grid.Column="3" Text="6" Clicked="OnNumberClicked" Style="{StaticResource DarkNumberButton}"/>
+        <Button Grid.Row="10" Grid.Column="4" Text="-" Clicked="OnOperatorClicked" Style="{StaticResource DarkFunctionButton}"/>
+
+        <Button Grid.Row="11" Grid.Column="0" Text="log" Clicked="OnFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+        <Button Grid.Row="11" Grid.Column="1" Text="1" Clicked="OnNumberClicked" Style="{StaticResource DarkNumberButton}"/>
+        <Button Grid.Row="11" Grid.Column="2" Text="2" Clicked="OnNumberClicked" Style="{StaticResource DarkNumberButton}"/>
+        <Button Grid.Row="11" Grid.Column="3" Text="3" Clicked="OnNumberClicked" Style="{StaticResource DarkNumberButton}"/>
+        <Button Grid.Row="11" Grid.Column="4" Text="+" Clicked="OnOperatorClicked" Style="{StaticResource DarkFunctionButton}"/>
+
+        <Button Grid.Row="12" Grid.Column="0" Text="ln" Clicked="OnFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+        <Button Grid.Row="12" Grid.Column="1" Text="+/-" Clicked="OnFunctionClicked" Style="{StaticResource DarkFunctionButton}"/>
+        <Button Grid.Row="12" Grid.Column="2" Text="0" Clicked="OnNumberClicked" Style="{StaticResource DarkNumberButton}"/>
+        <Button Grid.Row="12" Grid.Column="3" Text="," Clicked="OnNumberClicked" Style="{StaticResource DarkNumberButton}"/>
+        <Button Grid.Row="12" Grid.Column="4" Text="=" Clicked="OnEqualsClicked" Style="{StaticResource DarkEqualsButton}"/>
+
+    </Grid>
+
+</ContentPage>
